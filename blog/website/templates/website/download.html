@@ -1,0 +1,18 @@
+{% extends "entries/base.html" %}
+{% block content %}
+	<!-- Blog Entries Column -->
+      <div class="col-md-8">
+        <div class="card mb-4 mt-4">
+          <div class="card-header">
+            Download your website here:
+          </div>
+          <div class="card-body">
+            <form method="POST" action="website/download-website">
+              {% csrf_token %}
+              <p><label for="id_website_url">Website url:</label> <input type="text" name="website_url" maxlength="255" required="" id="id_website_url"></p>
+              <button type="submit" class="btn btn-primary">Start Downloading ...</button>
+            </form>
+          </div>
+        </div>
+      </div>
+{% endblock %}

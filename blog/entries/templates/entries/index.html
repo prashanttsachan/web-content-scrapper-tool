@@ -1,0 +1,41 @@
+{% extends "entries/base.html" %}
+{% block content %}
+	<!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-4">Blogs
+          <small>List</small>
+        </h1>
+
+        {% for entry in blog_entries %}
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">{{ entry.entry_title }}</h2>
+            <p class="card-text">{{ entry.entry_text|truncatechars:150 }}</p>
+            <a href="{% url 'entry-detail' entry.pk %}" class="btn btn-primary">Read More &rarr;</a>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{ entry.entry_date }} by
+            <a href="#">{{ entry.entry_author }}</a>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <ul class="pagination justify-content-center mb-4">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number}}">&larr; Previous Page</a>
+          </li>
+          {% endif %}
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number}}">Next Page &rarr;</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% endif %}
+
+      </div>
+
+{% endblock %}
